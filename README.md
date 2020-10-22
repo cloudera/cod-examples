@@ -9,7 +9,7 @@ of it to connect the application to your COD database.
 
 ## Included examples
 
-[Apache HBase (NoSQL), Java, Maven: Read-Write](hbase-read-write/README.md)
-[Apache Phoenix (SQL), Java, Maven: Read-Write](phoenix-read-write/README.md)
-[Apache Phoenix (SQL), Python: Read-Write](phoenixdb-read-write/README.md)
-[Apache Phoenix (SQL), Java, Dropwizard: Stock ticker](phoenix-stock-ticker/README.md)
+* [Apache HBase (NoSQL), Java, Maven: Read-Write](hbase-read-write/README.md)
+* [Apache Phoenix (SQL), Java, Maven: Read-Write](phoenix-read-write/README.md)
+* [Apache Phoenix (SQL), Python: Read-Write](phoenixdb-read-write/README.md)
+* [Apache Phoenix (SQL), Java, Dropwizard: Stock ticker](phoenix-stock-ticker/README.md)
