@@ -1,11 +1,14 @@
-# OdxExample
+# Stock ticker tracking
 
-How to start the OdxExample application
+How to start the StockApp
 ---
 
+First, make sure you have updated `pom.xml` with your COD database details.
+
 1. Run `mvn clean install` to build your application
-1. Create the tables `DB_USERNAME='csso_username' DB_PASSWORD='myspecialpassword' java -jar target/odx-example-1.0-SNAPSHOT.jar create-tables config.yml`
-1. Start application with `DB_USERNAME='csso_username' DB_PASSWORD='myspecialpassword' java -jar target/odx-example-1.0-SNAPSHOT.jar server config.yml`
+1. `cp config-template.yml config.yml` and replace your connection information
+1. Create the tables `DB_USERNAME='cdp_username' DB_PASSWORD='cdp_password' java -jar target/phoenix-stocks-0.1.0.jar create-tables config.yml`
+1. Start application with `DB_USERNAME='cdp_username' DB_PASSWORD='cdp_password' java -jar target/phoenix-stocks-0.1.0.jar server config.yml`
 1. To check that your application is running enter url `http://localhost:8080`
 
 Health Check
@@ -18,8 +21,9 @@ Create some companies
 ---
 
 ```
-curl -H 'Content-Type: application/json' --data '[{"tickerName":"CLDR", "companyName":"Cloudera"}, {"tickerName":"IBM", "companyName":"IBM"}]' http://localhost:8080/company/create
-curl -H 'Content-Type: application/json' --data '[{"tickerName":"MDB", "companyName":"MongoDB"}, {"tickerName":"TSLA", "companyName":"Tesla, Inc"}, {"tickerName":"NVDA","companyName":"NVIDIA Corporation"}]' http://localhost:8080/company/create
+$ curl -H 'Content-Type: application/json' --data '[{"tickerName":"CLDR", "companyName":"Cloudera"}, {"tickerName":"IBM", "companyName":"IBM"}]' http://localhost:8080/company/create
+$ curl -H 'Content-Type: application/json' --data '[{"tickerName":"UBER", "companyName":"Uber"}, {"tickerName":"TSLA", "companyName":"Tesla, Inc"}, {"tickerName":"NVDA","companyName":"NVIDIA Corporation"}]' http://localhost:8080/company/create
+$ curl -H 'Content-Type: application/json' --data '[{"tickerName":"AAPL", "companyName":"Apple"}, {"tickerName":"LYFT", "companyName":"Lyft"}, {"tickerName":"AMZN","companyName":"Amazon.com"}]' http://localhost:8080/company/create
 ```
 
 Fetch some ticker values
@@ -38,8 +42,6 @@ See the ticker for a company
 ---
 
 `curl http://localhost:8080/value/0`
-
-or http://localhost:8080/value/0
 
 Clean up after
 ---

@@ -1,0 +1,10 @@
+logging:
+  level: INFO
+  loggers:
+    #com.cloudera.cod.examples.sql: DEBUG
+    #org.apache.phoenix: DEBUG
+database:
+  jdbcUrl: 'Your Phoenix Thin JDBC string here'
+credentials:
+  username: ${DB_USERNAME}
+  password: ${DB_PASSWORD}
