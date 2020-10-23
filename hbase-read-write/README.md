@@ -64,7 +64,7 @@ $ cdp opdb describe-client-connectivity --database-name my-database --environmen
 
 In the above JSON, we need to use the `version` and the `mavenUrl` attributes in our Maven project/configuration.
 
-Finally, ensure that this exemplar has the correct URL for your COD database. Be sure to use the same `id` from the
+Finally, ensure that this project has the correct URL for your COD database. Be sure to use the same `id` from the
 `server` in `settings.xml` as you do in the `pom.xml` for this project. 
 ```
 <project>
@@ -91,14 +91,13 @@ Finally, ensure that this exemplar has the correct URL for your COD database. Be
 </project>
 ```
 
-# Build the exemplar
+# Build the project
 
-Build the examples:
 ```
 $ mvn package
 ```
 
-# Run the exemplar
+# Run the project
 
 Before we can run an example for the HBase client, we must observe that the `requiredKerberos` option is set to `true`
 for this connector. This means that we *must* run this from a computer which:
