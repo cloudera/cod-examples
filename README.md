@@ -7,6 +7,9 @@ These are "getting started" examples which are designed to be standalone and dem
 the developer's path. It is expected that, for each example, you will modify some part
 of it to connect the application to your COD database.
 
+For examples which use Apache Maven, you will need to place the proper Maven repository
+URL from your COD Database client connectivity information into the pom.xml file.
+
 ## Included examples
 
 * [Apache HBase (NoSQL), Java, Maven: Read-Write](hbase-read-write/README.md)

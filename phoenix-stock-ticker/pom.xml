@@ -8,7 +8,7 @@
 
     <groupId>com.cloudera.cod.examples</groupId>
     <artifactId>phoenix-stocks</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
 
     <name>OdxExample</name>
@@ -185,7 +185,7 @@
       <!-- Define our COD repository -->
       <repository>
         <id>sql-cod</id>
-        <url>https://cod--1emir4o5zrjg7-gateway0.cod-722.xcu2-8y8x.dev.cldr.work/cod--1emir4o5zrjg7/cdp-proxy-api/avatica/maven</url>
+        <url>FILL_ME_IN</url>
         <name>COD SQL Repository</name>
         <snapshots>
           <enabled>false</enabled>
