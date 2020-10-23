@@ -1,0 +1,3 @@
+flask
+phoenixdb>=1.0.0
+pytest
