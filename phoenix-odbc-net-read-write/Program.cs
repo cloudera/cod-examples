@@ -6,16 +6,17 @@ namespace PhoenixClient
     class Program
     {
         private static string hostname = "<hostname>";
-        private static string httppath = "<http_path>";
+        private static string httppath = "<httppath>";
         private static string username = "<username>";
-        private static string encryptedPwd = "<encrypted_pwd>";
+        private static string encryptedPwd = "<encrypted_password>";
+        private static string tableName = "BUBU";
 
         static void Main(string[] args)
         {
             Console.WriteLine("Hello ODBC!");
-
+            
             string connString =
-                @"Driver={Hortonworks Phoenix ODBC Driver};ssl=1;allowhostnamecnmismatch=1;allowselfsignedservercert=1;authmech=1;port=443;usesystemtruststore=1"
+                @"Driver={Hortonworks Phoenix ODBC Driver};ssl=1;allowhostnamecnmismatch=1;allowselfsignedservercert=1;authmech=1;port=443;usesystemtruststore=1;"
                 + "httppath=" + httppath + ";"
                 + "host=" + hostname + ";"
                 + "uid=" + username + ";"
@@ -27,7 +28,16 @@ namespace PhoenixClient
             Console.WriteLine("Connected to remote ODBC server");
 
             OdbcCommand cmd = cnn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM \"PHOENIX#\".BUBU";
+            cmd.CommandText = "INSERT INTO \"PHOENIX#\"." + tableName + " (ID) VALUES (20)";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "INSERT INTO \"PHOENIX#\"." + tableName + " (ID) VALUES (30)";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "INSERT INTO \"PHOENIX#\"." + tableName + " (ID) VALUES (50)";
+            cmd.ExecuteNonQuery();
+
+            Console.WriteLine("Records written successfully");
+
+            cmd.CommandText = "SELECT * FROM \"PHOENIX#\"." + tableName;
             OdbcDataReader reader = cmd.ExecuteReader();
 
             Console.WriteLine("Table fields:");
