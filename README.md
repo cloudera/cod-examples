@@ -32,3 +32,8 @@ Python adapter.
 
 A Java application built on Dropwizard which is a simple tracker for the price of
 various company's stock prices.
+
+* [Apache Phoenix (SQL), C#, .NET, ADO.NET](phoenix-odbc-net-read-write/README.md)
+
+A C# application which uses an ODBC driver to interact with Apache Phoenix via the ADO.NET
+extensions in .NET Framework 4.5.2 and above.
