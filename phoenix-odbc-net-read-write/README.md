@@ -16,3 +16,16 @@ environment's connectivity info:
 The program will add some records to the table at the beginning and retrieves them after that.
 Schema of the table is very simple, consists of a single int-type private key.
 
+The easiest way to populate the above parameters or the entire connection string is to use Visual Studio
+New Database Connection Wizard. The properties of the new connection will show the connection
+string among other parameters which could be copy-pasted into your code.
+
+## Building the application
+
+After configuring the above parameters (modifing the source files), this example can be either 
+loaded and built in latest version of Visual Studio (Community version is fine) or in command 
+line via the .Net SDK.
+
+## Running the application
+
+Run in Visual Studio (F5) or run the compiled executable.
