@@ -51,7 +51,7 @@
     <!-- Define our COD repository -->
     <repository>
       <id>sql-cod</id>
-      <url>https://cod--1emir4o5zrjg7-gateway0.cod-722.xcu2-8y8x.dev.cldr.work/cod--1emir4o5zrjg7/cdp-proxy-api/avatica/maven</url>
+      <url>FILL_ME_IN</url>
       <name>COD SQL Repository</name>
       <snapshots>
         <enabled>false</enabled>
