@@ -1,0 +1,7 @@
+Copyright 2021, Cloudera, Inc.
+
+The code in phoenix-stock-ticker depends on https://www.dropwizard.io/en/latest/ which is licensed with the
+Apache License 2.0. Copyright 2010-2013 Coda Hale and Yammer, Inc., 2014-2020 Dropwizard Team
+
+The code beneath phoenixdb-read-write is an adaptation of https://flask.palletsprojects.com/en/1.1.x/tutorial/.
+Flask is licensed with the 3-Clause BSD license. Copyright 2010 Pallets.
