@@ -161,7 +161,7 @@ For the thin client, the `describe-client-connectivity` call returns a base JDBC
 We can use Maven to ease launching this application, but a standalone Java program is similarly launched.
 
 ```
-$ mvn exec:exec -Dexec.executable=java -Dexec.args='-cp target/sql-libs/*:target/sql-exemplar-0.0.1-SNAPSHOT.jar com.cloudera.cod.examples.sql.ThinClient "jdbc:phoenix:thin:url=https://host.cloudera.site/.../cdp-proxy-api/avatica/;serialization=PROTOBUF;authentication=BASIC;avatica_user=workloadUsername;avatica_password=workloadPassword"'
+$ mvn exec:exec -Dexec.executable=java -Dexec.args='-cp target/sql-libs/*:target/phoenix-read-write-0.1.0.jar com.cloudera.cod.examples.sql.ThinClient "jdbc:phoenix:thin:url=https://host.cloudera.site/.../cdp-proxy-api/avatica/;serialization=PROTOBUF;authentication=BASIC;avatica_user=workloadUsername;avatica_password=workloadPassword"'
 ```
 
 Or, you can launch it without the help of Maven:
