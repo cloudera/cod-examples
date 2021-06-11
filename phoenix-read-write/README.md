@@ -7,49 +7,14 @@ https://docs.cloudera.com/management-console/cloud/user-management/topics/mc-set
 2. You have synchronized users from User Management Service in the CDP Control Plane into the environment
 in which your COD database is running.
 
-# Configure Maven to use your CDP password
+# Set Phoenix verions in your Maven project
 
-First time only! Follow this guide for explanations: http://maven.apache.org/guides/mini/guide-encryption.html
-
-Generate an (obfuscated) master password and store it in `~/.m2/settings-security.xml`
-```
-$ mvn --encrypt-master-password
-...
-```
-
-`settings-security.xml` will look like
-```
-<settingsSecurity>
-  <master>{your_encoded_master_password}</master>
-</settingsSecurity>
-```
-
-Encrypt your CDP workload password using the master password:
-```
-$ mvn --encrypt-password
-Password: <cdp-workload-password>
-```
-
-Create a `servers` element in your `~/.m2/settings.xml` which stores your CDP username and (encrypted) workload password
-```
-<settings ...>
-  <servers>
-    <server>
-      <id>sql-cod</id>
-      <username>csso_jelser</username>
-      <password>{encrypted_workload_password}</password>
-    </server>
-  </servers>
-</settings>
-```
-
-From the `describe-client-connectivity` call, we can get the Maven repository location to fetch jars from. This code snippet
+From the `describe-client-connectivity` call, we can get the Phoenix version information. This code snippet
 shows fetching the database connectivity information and parsing the required Phoenix information to build your
 application.
 ```
 $ for flavor in thick thin; do
   echo "Phoenix-$flavor"
-  cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq ".connectors[] | select(.name == \"phoenix-$flavor-jdbc\") | .dependencies.mavenUrl"
   cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq ".connectors[] | select(.name == \"phoenix-$flavor-jdbc\") | .version"
 done
 ```
@@ -57,41 +22,58 @@ done
 ```
 Phoenix-thick
 "https://gateway.cloudera.site/.../cdp-proxy-api/avatica/maven"
-"5.0.0.7.2.0.0-128"
+"5.1.1.7.2.9.0-203"
 Phoenix-thin
 "https://gateway.cloudera.site/.../cdp-proxy-api/avatica/maven"
-"5.0.0.7.2.0.0-128"
+"6.0.0.7.2.9.0-203"
 ```
 
-Finally, ensure that this project has the correct URL for your COD database. Be sure to use the same `id` in
-`settings.xml` as well as this local `pom.xml`.
+Finally, update the Phoenix versions in our Maven project/configuration.
+For Cloudera Runtime 7.2.8 and before use `phoenix-client` artifactId instead of `phoenix-client-hbase-2.2` for dependency and also update the `includeArtifactIds` with `phoenix-client,phoenix-queryserver-client`
 ```
 <project>
   <dependencies>
-    <!-- SQL client for COD -->
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client</artifactId>
-      <version>5.0.0.7.2.2.0-244</version>
+      <artifactId>phoenix-client-hbase-2.2</artifactId>
+      <!-- Phoenix thick client version given by COD -->
+      <version>5.1.1.7.2.9.0-203</version>
     </dependency>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-queryserver-client</artifactId>
-      <version>5.0.0.7.2.2.0-244</version>
+      <!-- Phoenix thin client version given by COD -->
+      <version>6.0.0.7.2.9.0-203</version>
     </dependency>
   </dependencies>
+    <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <execution>
+            <id>copy-sql-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <!-- Use phoenix-client artifactId for Cloudera Runtime 7.2.8 and before -->
+              <!-- <includeArtifactIds>phoenix-client,phoenix-queryserver-client</includeArtifactIds> -->
+              <includeArtifactIds>phoenix-client-hbase-2.2,phoenix-queryserver-client</includeArtifactIds>
+              <outputDirectory>${project.build.directory}/sql-libs/</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   ...
-  <repositories>
-    <!-- Define our COD repository -->
-    <repository>
-      <id>sql-cod</id>
-      <url>https://gateway.cloudera.site/.../cdp-proxy-api/avatica/maven</url>
-      <name>COD SQL Repository</name>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 </project>
 ```
 

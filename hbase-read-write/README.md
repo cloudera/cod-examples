@@ -7,50 +7,16 @@ https://docs.cloudera.com/management-console/cloud/user-management/topics/mc-set
 2. You have synchronized users from User Management Service in the CDP Control Plane into the environment
 in which your COD database is running.
 
-# Configure Maven to use your CDP password
+# Set HBase version in your Maven project
 
-First time only! Follow this guide for explanations: http://maven.apache.org/guides/mini/guide-encryption.html
-
-Generate an (obfuscated) master password and store it in `~/.m2/settings-security.xml`
-```
-$ mvn --encrypt-master-password
-Password: <your super hard-to-guess secret key>
-```
-
-`settings-security.xml` will look like
-```
-<settingsSecurity>
-  <master>{your_encoded_master_password}</master>
-</settingsSecurity>
-```
-
-Encrypt your CDP password using the master password:
-```
-$ mvn --encrypt-password
-Password: <cdp-workload-password>
-```
-
-Create a `servers` element in your `~/.m2/settings.xml` which stores your CDP username and (encrypted) workload password
-```
-<settings ...>
-  <servers>
-    <server>
-      <id>nosql-cod-repository</id>
-      <username>your_CDP_username</username>
-      <password>{encrypted_workload_password}</password>
-    </server>
-  </servers>
-</settings>
-```
-
-From the `describe-client-connectivity` call, we can get the Maven repository location to fetch jars from. This code snippet
+From the `describe-client-connectivity` call, we can get the HBase version information. This code snippet
 shows fetching the database connectivity information and parsing the required HBase information to build your
 application.
 ```
 $ cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env  | jq '.connectors[] | select(.name == "hbase")'
 {
   "name": "hbase",
-  "version": "2.2.5.7.2.2.0-244",
+  "version": "2.2.6.7.2.9.0-203",
   "kind": "LIBRARY",
   "dependencies": {
     "mavenUrl": "https://host.cloudera.site/.../cdp-proxy-api/hbase/jars"
@@ -62,10 +28,8 @@ $ cdp opdb describe-client-connectivity --database-name my-database --environmen
 }
 ```
 
-In the above JSON, we need to use the `version` and the `mavenUrl` attributes in our Maven project/configuration.
+In the above JSON, we need to use the `version` attribute in our Maven project/configuration.
 
-Finally, ensure that this project has the correct URL for your COD database. Be sure to use the same `id` from the
-`server` in `settings.xml` as you do in the `pom.xml` for this project. 
 ```
 <project>
   <dependencies>
@@ -73,21 +37,10 @@ Finally, ensure that this project has the correct URL for your COD database. Be 
     <dependency>
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-shaded-client</artifactId>
-      <version>2.2.5.7.2.2.0-244</version>
+      <version>2.2.6.7.2.9.0-203</version>
     </dependency>
   </dependencies>
   ...
-  <repositories>
-    <!-- Define our COD repository; this would be given to us by COD itself -->
-    <repository>
-      <id>nosql-cod-repository</id>
-      <url>https://host.cloudera.site/.../cdp-proxy-api/hbase/jars</url>
-      <name>NoSQL COD Repository</name>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 </project>
 ```
 
