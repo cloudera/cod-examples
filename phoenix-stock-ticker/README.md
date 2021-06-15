@@ -3,7 +3,7 @@
 How to start the StockApp
 ---
 
-First, make sure you have updated `pom.xml` with your COD database details.
+First, make sure you have updated `pom.xml` with your COD database version information.
 
 1. Run `mvn clean install` to build your application
 1. `cp config-template.yml config.yml` and replace your connection information

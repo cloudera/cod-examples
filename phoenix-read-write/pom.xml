@@ -10,15 +10,17 @@
   <dependencies>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client</artifactId>
-      <!-- Version given by COD -->
-      <version>5.0.0.7.2.2.1-5</version>
+      <artifactId>phoenix-client-hbase-2.2</artifactId>
+      <!-- Use phoenix-client artifactId for Cloudera Runtime 7.2.8 and before -->
+      <!-- <artifactId>phoenix-client</artifactId> -->
+      <!-- Phoenix thick client version given by COD -->
+      <version>5.1.1.7.2.9.0-203</version>
     </dependency>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-queryserver-client</artifactId>
-      <!-- Version given by COD -->
-      <version>5.0.0.7.2.2.1-5</version>
+      <!-- Phoenix thin client version given by COD -->
+      <version>6.0.0.7.2.9.0-203</version>
     </dependency>
   </dependencies>
   <build>
@@ -36,7 +38,9 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <includeArtifactIds>phoenix-client,phoenix-queryserver-client</includeArtifactIds>
+              <!-- Use phoenix-client artifactId for Cloudera Runtime 7.2.8 and before -->
+              <!-- <includeArtifactIds>phoenix-client,phoenix-queryserver-client</includeArtifactIds> -->
+              <includeArtifactIds>phoenix-client-hbase-2.2,phoenix-queryserver-client</includeArtifactIds>
               <outputDirectory>${project.build.directory}/sql-libs/</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
@@ -48,11 +52,10 @@
     </plugins>
   </build>
   <repositories>
-    <!-- Define our COD repository -->
     <repository>
-      <id>sql-cod</id>
-      <url>FILL_ME_IN</url>
-      <name>COD SQL Repository</name>
+      <id>cloudera</id>
+      <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+      <name>Cloudera Repository</name>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
