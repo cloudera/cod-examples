@@ -19,8 +19,8 @@ in which your COD database is running.
         ```
     2. Use the export command to add new environment variables:
         ```
-        export DB_USER=[your_data_base_username]
-        export DB_PASS=[your_data_base_password]
+        export DB_USER=[your_workload_username]
+        export DB_PASS=[your_workload_password]
         ```
     3. Save any changes you made to the .bash_profile file.
     4. Execute the new .bash_profile by either restarting the terminal window or using:
@@ -32,9 +32,9 @@ in which your COD database is running.
 # Run example
 1. Run write_example.py
 ```
-~/YourWorkSpace/hbase-rest-read-write/wrie_example.py
+~/YourWorkSpace/hbase-rest-read-write/cloudera/cod/examples/wrie_example.py
 ```
 2. Run read_example.py
 ```
-~/YourWorkSpace/hbase-rest-read-write/read_example.py
+~/YourWorkSpace/hbase-rest-read-write/cloudera/cod/examples/read_example.py
 ```

@@ -5,7 +5,6 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 request = requests.get(baseurl + "/" + table_name + "/COD_NOSQL__REST_TEST-*", headers={"Accept": "application/json"},
-                       verify=False,
                        auth=HTTPBasicAuth(DB_USER, DB_PASS))
 
 if not is_successful(request):
@@ -16,14 +15,18 @@ bleats = json.loads(request.text)
 
 for row in bleats['Row']:
     message = ''
-    lineNumber = 0
-    username = ''
+    timestamp = ''
+    user = ''
 
     for cell in row['Cell']:
-        tmp = cell['column']
-
         column_name_info = base64.b64decode(cell['column'])
         column_name_info = str(column_name_info, 'utf8')
         value_info = base64.b64decode(cell['$'])
         value_info = str(value_info, 'utf8')
-        print("column_name_info: " + column_name_info + "; value: " + value_info)
+        if column_name_info == cf_name + ":" + message_column:
+            message = value_info
+        elif column_name_info == cf_name + ":" + created_time:
+            timestamp = value_info
+        elif column_name_info == cf_name + ":" + username:
+            user = value_info
+    print("A message" + "\"" + message + "\" from the user \"" + user + "\" created on " + timestamp)

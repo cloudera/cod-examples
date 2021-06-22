@@ -8,7 +8,7 @@ baseurl = "https://cod-13j43am48zyyw-gateway0.cod-729.xcu2-8y8x.dev.cldr.work/co
 DB_USER = os.environ.get("DB_USER")
 DB_PASS = os.environ.get("DB_PASS")
 
-table_name = "COD_NOSQL__REST_TEST"
+table_name = "COD_NOSQL_REST_TEST"
 cf_name = "info"
 username = "username"
 
