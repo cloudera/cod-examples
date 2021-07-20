@@ -32,7 +32,7 @@ in which your COD database is running.
 # Run example
 1. Run write_example.py
 ```
-~/YourWorkSpace/hbase-rest-read-write/cloudera/cod/examples/wrie_example.py
+~/YourWorkSpace/hbase-rest-read-write/cloudera/cod/examples/write_example.py
 ```
 2. Run read_example.py
 ```
