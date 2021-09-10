@@ -90,7 +90,7 @@ Again, use the `describe-client-connectivity` endpoint to determine the base JDB
 ```
 $ for flavor in thick thin; do
   echo "Phoenix-$flavor"
-  ./clients/cdpcli/cdp.sh opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq ".connectors[] | select(.name == \"phoenix-$flavor-jdbc\") | .configuration.jdbcUrl"
+  cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq ".connectors[] | select(.name == \"phoenix-$flavor-jdbc\") | .configuration.jdbcUrl"
 done
 ```
 

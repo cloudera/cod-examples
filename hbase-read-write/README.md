@@ -71,7 +71,7 @@ After the pre-requisites are met, we can use the `clientConfigurationUrl` from `
 the necessary configuration clients to talk to HBase.
 
 ```
-$ cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env  | jq '.connectors[] | select(.name == "hbase") | .configuration.clientConfigurationUrl'
+$ cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq '.connectors[] | select(.name == "hbase")| .configuration.clientConfigurationDetails[0].url'
 "https://host.cloudera.site/clouderamanager/api/v41/clusters/.../services/hbase/clientConfig"
 $ curl -o clientConfig.zip -u 'cdp_username' 'https://host.cloudera.site/clouderamanager/api/v41/clusters/.../services/hbase/clientConfig'
 ```
