@@ -19,10 +19,15 @@ $ cdp opdb describe-client-connectivity --database-name my-database --environmen
   "version": "2.2.6.7.2.9.0-203",
   "kind": "LIBRARY",
   "dependencies": {
-    "mavenUrl": "https://host.cloudera.site/.../cdp-proxy-api/hbase/jars"
+    "mavenUrl": "https://repository.cloudera.com/artifactory/cloudera-repos"
   },
   "configuration": {
-    "clientConfigurationUrl": "https://host.cloudera.site/clouderamanager/api/v41/clusters/.../services/hbase/clientConfig"
+    "clientConfigurationDetails": [
+        {
+            "name": "HBASE",
+            "url": "https://cod-b5tllgdnxf4d-gateway0.cod-729.xcu2-8y8x.dev.cldr.work/clouderamanager/api/v41/clusters/.../services/hbase/clientConfig"
+        }
+    ]
   },
   "requiresKerberos": true
 }
