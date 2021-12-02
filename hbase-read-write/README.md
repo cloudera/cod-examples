@@ -98,3 +98,8 @@ Password: ***********
 $ export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 $ java -cp target/nosql-libs/*:target/hbase-read-write-0.1.0.jar:hbase-conf com.cloudera.cod.examples.nosql.ReadWriteExample
 ```
+
+For HBase versions 2.2.6+ also include opentelemetry-api-0.12.0.jar and opentelemetry-context-0.12.0.jar on the class path:
+```
+java -cp target/nosql-libs/*:target/hbase-read-write-0.1.0.jar:/opt/cloudera/parcels/CDH-<version>/lib/hbase/lib/opentelemetry-api-0.12.0.jar:/opt/cloudera/parcels/CDH-<version>/lib/hbase/lib/opentelemetry-context-0.12.0.jar:hbase-conf com.cloudera.cod.examples.nosql.ReadWriteExample
+```
