@@ -1,0 +1,30 @@
+{
+   "mounts":[
+      {
+         "resourceName":"phoenix-spark-app-resource"
+      }
+   ],
+   "name":"phoenix-spark-app",
+   "spark":{
+      "className":"com.cloudera.cod.examples.spark.SparkApp",
+      "args":[
+         "{{ phoenix_jdbc_url }}"
+      ],
+      "driverCores":1,
+      "driverMemory":"1g",
+      "executorCores":1,
+      "executorMemory":"1g",
+      "file":"phoenix-spark-transactions-0.1.0.jar",
+      "pyFiles":[
+
+      ],
+      "files":[
+        "hbase-shaded-mapreduce-<hbase.version>.jar",
+        "opentelemetry-api-0.12.0.jar",
+        "phoenix5-spark-<phoenix-spark-connector.version>.jar",
+        "phoenix5-spark-shaded-<phoenix-spark-connector.version>.jar",
+        "phoenix-client-hbase-2.4-<phoenix.version>.jar"
+      ],
+      "numExecutors":4
+   }
+}
