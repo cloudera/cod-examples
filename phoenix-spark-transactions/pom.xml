@@ -8,12 +8,14 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <encoding>UTF-8</encoding>
-    <scala.version>2.11.12</scala.version>
-    <scala.compat.version>2.11</scala.compat.version>
+    <scala.version>2.12.10</scala.version>
+    <scala.compat.version>2.12</scala.compat.version>
     <spec2.version>4.2.0</spec2.version>
     <!-- update it to the DEX supported version -->
-    <spark.version>2.4.0</spark.version>
-    <scala.binary.version>2.11</scala.binary.version>
+    <spark.version>2.4.7</spark.version>
+    <scala.binary.version>2.12</scala.binary.version>
+    <phoenix.connector.version>6.0.0.7.2.14.0-133</phoenix.connector.version>
+    <hbase.version>2.4.6.7.2.14.0-133</hbase.version>
   </properties>
 
   <dependencies>
@@ -24,16 +26,9 @@
     </dependency>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix5-spark</artifactId>
-      <!-- Phoenix spark connector version given by COD -->
-      <version>6.0.0.7.2.14.0-133</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix5-spark-shaded</artifactId>
       <!-- Phoenix spark connector version given by COD -->
-      <version>6.0.0.7.2.14.0-133</version>
+      <version>${phoenix.connector.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -46,17 +41,16 @@
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-shaded-mapreduce</artifactId>
       <!-- HBase version given by COD -->
-      <version>2.4.6.7.2.14.0-133</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client-hbase-2.4</artifactId>
-      <!-- HBase version given by COD -->
-      <version>5.1.1.7.2.14.0-133</version>
+      <version>${hbase.version}</version>
     </dependency>
     <dependency>
       <groupId>io.opentelemetry</groupId>
       <artifactId>opentelemetry-api</artifactId>
+      <version>0.12.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.opentelemetry</groupId>
+      <artifactId>opentelemetry-context</artifactId>
       <version>0.12.0</version>
     </dependency>
   </dependencies>
@@ -71,13 +65,13 @@
         <version>3.1.2</version>
         <executions>
           <execution>
-            <id>copy-sql-dependencies</id>
+            <id>copy-spark-dependencies</id>
             <phase>package</phase>
             <goals>
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <includeArtifactIds>hbase-shaded-mapreduce,phoenix-client-hbase-2.4,phoenix5-spark,phoenix5-spark-shaded,opentelemetry-api</includeArtifactIds>
+              <includeArtifactIds>hbase-shaded-mapreduce,phoenix5-spark-shaded,opentelemetry-api,opentelemetry-context</includeArtifactIds>
               <outputDirectory>${project.build.directory}/connector-libs/</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>

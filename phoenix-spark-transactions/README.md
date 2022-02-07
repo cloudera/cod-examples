@@ -18,63 +18,28 @@ From the `describe-client-connectivity` call, we can get the HBase and Phoenix v
 shows fetching the database connectivity information and parsing the required HBase and Phoenix information to build your
 application.
 ```
-echo "Phoenix version"
-cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq ".connectors[] | select(.name == \"phoenix-thick-jdbc\") | .version"
 echo "HBase version"
 cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq ".connectors[] | select(.name == \"hbase\") | .version"
-echo "Phoenix Spark Version"
+echo "Phoenix Connector Version"
 cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env | jq ".connectors[] | select(.name == \"phoenix-thin-jdbc\") | .version"
 ```
 
 
 ```
-Phoenix Version
-"5.1.1.7.2.14.0-133"
 HBase Version
 2.4.6.7.2.14.0-133
 Phoenix Spark Version
 "6.0.0.7.2.14.0-133"
 ```
 
-Finally, update the HBase and Phoenix versions in our Maven project/configuration.
+Finally, update the HBase and Phoenix Connector versions in our Maven project/configuration.
 ```
-<project>
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix5-spark</artifactId>
-      <!-- Phoenix spark connector version given by COD -->
-      <version>6.0.0.7.2.14.0-133</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix5-spark-shaded</artifactId>
-      <!-- Phoenix spark connector version given by COD -->
-      <version>6.0.0.7.2.14.0-133</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_${scala.binary.version}</artifactId>
-      <version>${spark.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.hbase</groupId>
-      <artifactId>hbase-shaded-mapreduce</artifactId>
-      <!-- HBase version given by COD -->
-      <version>2.4.6.7.2.14.0-133</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client-hbase-2.4</artifactId>
-      <!-- HBase version given by COD -->
-      <version>5.1.1.7.2.14.0-133</version>
-    </dependency>
-  </dependencies>
-  ...
-</project>
+<properties>
+...
+    <phoenix.connector.version>6.0.0.7.2.14.0-133</phoenix.connector.version>
+    <hbase.version>2.4.6.7.2.14.0-133</hbase.version>
+...
+</properties>
 ```
 
 # Download hbase-site.xml and hbase-omid-client-config.yml
@@ -124,9 +89,8 @@ Upload required jars that were downloaded during build.
 ```
 cde resource upload --name spark-app-resource --local-path ./target/connector-libs/hbase-shaded-mapreduce-2.4.6.7.2.14.0-133.jar --resource-path hbase-shaded-mapreduce-2.4.6.7.2.14.0-133.jar
 cde resource upload --name spark-app-resource --local-path ./target/connector-libs/opentelemetry-api-0.12.0.jar --resource-path opentelemetry-api-0.12.0.jar
-cde resource upload --name spark-app-resource --local-path ./target/connector-libs/phoenix5-spark-6.0.0.7.2.14.0-133.jar --resource-path phoenix5-spark-6.0.0.7.2.14.0-133.jar
+cde resource upload --name spark-app-resource --local-path ./target/connector-libs/opentelemetry-context-0.12.0.jar --resource-path opentelemetry-context-0.12.0.jar
 cde resource upload --name spark-app-resource --local-path ./target/connector-libs/phoenix5-spark-shaded-6.0.0.7.2.14.0-133.jar --resource-path phoenix5-spark-shaded-6.0.0.7.2.14.0-133.jar
-cde resource upload --name spark-app-resource --local-path ./target/connector-libs/phoenix-client-hbase-2.4-5.1.1.7.2.14.0-133.jar --resource-path phoenix-client-hbase-2.4-5.1.1.7.2.14.0-133.jar
 ```
 Upload the spark application app jar that was built earlier.
 
@@ -159,9 +123,8 @@ Replace HBase, Phoenix, Phoenix spark connector versions in the spark-job.json a
       "files":[
         "hbase-shaded-mapreduce-2.4.6.7.2.14.0-133.jar",
         "opentelemetry-api-0.12.0.jar",
-        "phoenix5-spark-6.0.0.7.2.14.0-133.jar",
+        "opentelemetry-context-0.12.0.jar"
         "phoenix5-spark-shaded-6.0.0.7.2.14.0-133.jar",
-        "phoenix-client-hbase-2.4-5.1.1.7.2.14.0-133.jar"
       ],
       "numExecutors":4
    }

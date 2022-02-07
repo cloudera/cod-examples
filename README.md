@@ -35,8 +35,14 @@ various company's stock prices.
 A C# application which uses an ODBC driver to interact with Apache Phoenix via the ADO.NET
 extensions in .NET Framework 4.5.2 and above.
 
-* [Apache Phoenix Spark Connector, Scala, Maven: Transactions](phoenix-spark-transactions/README.md)
+* [Apache Phoenix Spark Connector, CDE, Maven: Transactions](phoenix-spark-transactions/README.md)
 
 A Scala application which creates a Phoenix transactional table, writes some rows
-in batch wise transactions, partition wise transactions and demonstrates how conflicts handled
-between streaming applications and spark applications to ensure consitency.
+in batch wise transactions, partition wise transactions and demonstrates
+how conflicts between streaming applications and spark applications are handled to ensure consitency.
+
+* [Apache Phoenix Spark Connector, Spark, CDP DC, Maven: Transactions](phoenix-spark-transactions/README.CDP.md)
+
+A Scala application which creates a Phoenix transactional table, writes some rows
+in batch wise transactions, partition wise transactions and demonstrates
+how conflicts between streaming applications and spark applications are handled to ensure consitency.

@@ -21,9 +21,8 @@
       "files":[
         "hbase-shaded-mapreduce-<hbase.version>.jar",
         "opentelemetry-api-0.12.0.jar",
-        "phoenix5-spark-<phoenix-spark-connector.version>.jar",
+        "opentelemetry-context-0.12.0.jar",
         "phoenix5-spark-shaded-<phoenix-spark-connector.version>.jar",
-        "phoenix-client-hbase-2.4-<phoenix.version>.jar"
       ],
       "numExecutors":4
    }

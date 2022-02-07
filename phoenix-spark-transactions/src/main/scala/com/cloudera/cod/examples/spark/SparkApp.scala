@@ -70,7 +70,7 @@ object SparkApp {
       .format("phoenix")
       .options(Map("table" -> tableName, PhoenixDataSource.ZOOKEEPER_URL -> zkUrl,
         PhoenixDataSource.PHOENIX_CONFIGS -> extraOptions))
-      .mode(SaveMode.Overwrite)
+      .mode(SaveMode.Append)
       .save()
 
 
@@ -92,7 +92,7 @@ object SparkApp {
       .format("phoenix")
       .options(Map("table" -> tableName, PhoenixDataSource.ZOOKEEPER_URL -> zkUrl,
         PhoenixDataSource.PHOENIX_CONFIGS -> extraOptions))
-      .mode(SaveMode.Overwrite)
+      .mode(SaveMode.Append)
       .save()
 
 
@@ -113,7 +113,7 @@ object SparkApp {
       .format("phoenix")
       .options(Map("table" -> tableName, PhoenixDataSource.ZOOKEEPER_URL -> zkUrl,
         PhoenixDataSource.PHOENIX_CONFIGS -> extraOptions))
-      .mode(SaveMode.Overwrite)
+      .mode(SaveMode.Append)
       .save()
     try {
       conn.commit()
