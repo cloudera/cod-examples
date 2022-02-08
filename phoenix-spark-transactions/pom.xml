@@ -24,17 +24,18 @@
       <version>${scala.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix5-spark-shaded</artifactId>
-      <!-- Phoenix spark connector version given by COD -->
-      <version>${phoenix.connector.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-sql_${scala.binary.version}</artifactId>
       <version>${spark.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <!-- These dependencies are not necessary to compile/build the project JAR.
+    Their purpose is to download the necessary JARs so that they can be added to the CDE project. -->
+    <dependency>
+      <groupId>org.apache.phoenix</groupId>
+      <artifactId>phoenix5-spark-shaded</artifactId>
+      <!-- Phoenix spark connector version given by COD -->
+      <version>${phoenix.connector.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.hbase</groupId>
