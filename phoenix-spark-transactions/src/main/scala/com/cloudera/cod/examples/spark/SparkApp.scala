@@ -17,10 +17,8 @@ package com.cloudera.cod.examples.spark
 
 import org.apache.spark.sql.{Row, SaveMode, SparkSession}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
-import org.apache.omid.tso.client.AbortException
-import org.apache.phoenix.spark.datasource.v2.PhoenixDataSource
 
-import java.sql.{DriverManager}
+import java.sql.{DriverManager, SQLException}
 
 object SparkApp {
 
@@ -69,9 +67,8 @@ object SparkApp {
     var extraOptions = "phoenix.transactions.enabled=true,phoenix.upsert.batch.size=100";
     df.write
       .format("phoenix")
-      .options(Map("table" -> tableName, PhoenixDataSource.ZOOKEEPER_URL -> zkUrl,
-        PhoenixDataSource.PHOENIX_CONFIGS -> extraOptions))
-      .mode(SaveMode.Append)
+      .options(Map("table" -> tableName, "zkUrl" -> zkUrl, "phoenixconfigs" -> extraOptions))
+      .mode(SaveMode.Overwrite)
       .save()
 
 
@@ -91,9 +88,8 @@ object SparkApp {
 
     df.write
       .format("phoenix")
-      .options(Map("table" -> tableName, PhoenixDataSource.ZOOKEEPER_URL -> zkUrl,
-        PhoenixDataSource.PHOENIX_CONFIGS -> extraOptions))
-      .mode(SaveMode.Append)
+      .options(Map("table" -> tableName, "zkUrl" -> zkUrl, "phoenixconfigs" -> extraOptions))
+      .mode(SaveMode.Overwrite)
       .save()
 
 
@@ -111,14 +107,16 @@ object SparkApp {
 
     df.write
       .format("phoenix")
-      .options(Map("table" -> tableName, PhoenixDataSource.ZOOKEEPER_URL -> zkUrl,
-        PhoenixDataSource.PHOENIX_CONFIGS -> extraOptions))
-      .mode(SaveMode.Append)
+      .options(Map("table" -> tableName, "zkUrl" -> zkUrl, "phoenixconfigs" -> extraOptions))
+      .mode(SaveMode.Overwrite)
       .save()
     try {
       conn.commit()
     } catch {
-      case e: AbortException => println("This is expected because of trying to commit conflicting data set.")
+      case e: SQLException => {
+        conn.rollback();
+        println("This is expected because of trying to commit conflicting data set.")
+      }
     }
     conn.close();
   }

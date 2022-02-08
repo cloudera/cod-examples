@@ -40,9 +40,13 @@ extensions in .NET Framework 4.5.2 and above.
 A Scala application which creates a Phoenix transactional table, writes some rows
 in batch wise transactions, partition wise transactions and demonstrates
 how conflicts between streaming applications and spark applications are handled to ensure consitency.
+This is the same application as the CDP Private Cloude Base example, but illustrates the differences 
+between packaging and running the Spark application in CDP Private Cloude Base and in Cloudera Data Engineering products.
 
-* [Apache Phoenix Spark Connector, Spark, CDP DC, Maven: Transactions](phoenix-spark-transactions/README.CDP.md)
+* [Apache Phoenix Spark Connector, Spark, CDP Private Cloud Base, Maven: Transactions](phoenix-spark-transactions/README.CDP.md)
 
 A Scala application which creates a Phoenix transactional table, writes some rows
 in batch wise transactions, partition wise transactions and demonstrates
 how conflicts between streaming applications and spark applications are handled to ensure consitency.
+This is the same application as the Cloudera Data Engineering example, but illustrates the differences
+ between packaging and running the Spark application in CDP Private Cloude Base and in Cloudera Data Engineering products.
