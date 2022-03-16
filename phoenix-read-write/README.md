@@ -128,6 +128,14 @@ $ kinit <cdp_username>
 $ java -cp target/sql-libs/*:target/phoenix-read-write-0.1.0.jar:hbase-conf com.cloudera.cod.examples.sql.Client "jdbc:phoenix:node1.cloudera.site,node2.cloudera.site,node3.cloudera.site:2181:/hbase"
 ```
 
+### Running the transactional client example
+
+```
+$ kinit <cdp_username>
+$ java -cp target/sql-libs/*:target/phoenix-read-write-0.1.0.jar:hbase-conf com.cloudera.cod.examples.sql.TransactionalClient "jdbc:phoenix:node1.cloudera.site,node2.cloudera.site,node3.cloudera.site:2181:/hbase"
+```
+
+
 ## Running the thin client example
 
 First, we can observe that because this connector (phoenix-thin-driver) has `requiredKerberos` set to `false`, that means
