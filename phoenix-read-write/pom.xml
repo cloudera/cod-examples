@@ -10,17 +10,17 @@
   <dependencies>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client-hbase-2.2</artifactId>
+      <artifactId>phoenix-client-hbase-2.4</artifactId>
       <!-- Use phoenix-client artifactId for Cloudera Runtime 7.2.8 and before -->
       <!-- <artifactId>phoenix-client</artifactId> -->
       <!-- Phoenix thick client version given by COD -->
-      <version>5.1.1.7.2.9.0-203</version>
+      <version>5.1.1.7.2.14.1-3</version>
     </dependency>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-queryserver-client</artifactId>
       <!-- Phoenix thin client version given by COD -->
-      <version>6.0.0.7.2.9.0-203</version>
+      <version>6.0.0.7.2.14.1-3</version>
     </dependency>
   </dependencies>
   <build>
