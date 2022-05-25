@@ -7,20 +7,52 @@
      <maven.compiler.source>1.8</maven.compiler.source>
      <maven.compiler.target>1.8</maven.compiler.target>
    </properties>
+  <profiles>
+    <profile>
+      <id>HBASE-2.2-7.2.8</id>
+      <properties>
+        <pch.artifactid.version>phoenix-client</pch.artifactid.version>
+        <!-- Phoenix thick client version given by COD -->
+        <phoenix.client.version>5.0.0.7.2.8.0-228</phoenix.client.version>
+        <!-- Phoenix thin client version given by COD -->
+        <phoenix.queryserver.version>5.0.0.7.2.8.0-228</phoenix.queryserver.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>HBASE-2.2</id>
+      <properties>
+        <pch.artifactid.version>phoenix-client-hbase-2.2</pch.artifactid.version>
+        <!-- Phoenix thick client version given by COD -->
+        <phoenix.client.version>5.1.1.7.2.9.0-203</phoenix.client.version>
+        <!-- Phoenix thin client version given by COD -->
+        <phoenix.queryserver.version>6.0.0.7.2.9.0-203</phoenix.queryserver.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>HBASE-2.4</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <pch.artifactid.version>phoenix-client-hbase-2.4</pch.artifactid.version>
+        <!-- Phoenix thick client version given by COD -->
+        <phoenix.client.version>5.1.1.7.2.15.0-147</phoenix.client.version>
+        <!-- Phoenix thin client version given by COD -->
+        <phoenix.queryserver.version>6.0.0.7.2.15.0-147</phoenix.queryserver.version>
+      </properties>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client-hbase-2.4</artifactId>
-      <!-- Use phoenix-client artifactId for Cloudera Runtime 7.2.8 and before -->
-      <!-- <artifactId>phoenix-client</artifactId> -->
-      <!-- Phoenix thick client version given by COD -->
-      <version>5.1.1.7.2.14.1-3</version>
+      <artifactId>${pch.artifactid.version}</artifactId>
+      <version>${phoenix.client.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-queryserver-client</artifactId>
       <!-- Phoenix thin client version given by COD -->
-      <version>6.0.0.7.2.14.1-3</version>
+      <version>${phoenix.queryserver.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -38,9 +70,7 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <!-- Use phoenix-client artifactId for Cloudera Runtime 7.2.8 and before -->
-              <!-- <includeArtifactIds>phoenix-client,phoenix-queryserver-client</includeArtifactIds> -->
-              <includeArtifactIds>phoenix-client-hbase-2.2,phoenix-queryserver-client</includeArtifactIds>
+              <includeArtifactIds>${pch.artifactid.version},phoenix-queryserver-client</includeArtifactIds>
               <outputDirectory>${project.build.directory}/sql-libs/</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
