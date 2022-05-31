@@ -11,7 +11,7 @@
     <profile>
       <id>HBASE-2.2-7.2.8</id>
       <properties>
-        <pch.artifactid.version>phoenix-client</pch.artifactid.version>
+        <phoenix.client.artifactid>phoenix-client</phoenix.client.artifactid>
         <!-- Phoenix thick client version given by COD -->
         <phoenix.client.version>5.0.0.7.2.8.0-228</phoenix.client.version>
         <!-- Phoenix thin client version given by COD -->
@@ -21,7 +21,7 @@
     <profile>
       <id>HBASE-2.2</id>
       <properties>
-        <pch.artifactid.version>phoenix-client-hbase-2.2</pch.artifactid.version>
+        <phoenix.client.artifactid>phoenix-client-hbase-2.2</phoenix.client.artifactid>
         <!-- Phoenix thick client version given by COD -->
         <phoenix.client.version>5.1.1.7.2.9.0-203</phoenix.client.version>
         <!-- Phoenix thin client version given by COD -->
@@ -34,7 +34,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <pch.artifactid.version>phoenix-client-hbase-2.4</pch.artifactid.version>
+        <phoenix.client.artifactid>phoenix-client-hbase-2.4</phoenix.client.artifactid>
         <!-- Phoenix thick client version given by COD -->
         <phoenix.client.version>5.1.1.7.2.15.0-147</phoenix.client.version>
         <!-- Phoenix thin client version given by COD -->
@@ -45,7 +45,7 @@
   <dependencies>
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>${pch.artifactid.version}</artifactId>
+      <artifactId>${phoenix.client.artifactid}</artifactId>
       <version>${phoenix.client.version}</version>
     </dependency>
     <dependency>
@@ -70,7 +70,7 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <includeArtifactIds>${pch.artifactid.version},phoenix-queryserver-client</includeArtifactIds>
+              <includeArtifactIds>${phoenix.client.artifactid},phoenix-queryserver-client</includeArtifactIds>
               <outputDirectory>${project.build.directory}/sql-libs/</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
