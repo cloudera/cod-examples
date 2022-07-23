@@ -50,3 +50,7 @@ in batch wise transactions, partition wise transactions and demonstrates
 how conflicts between streaming applications and spark applications are handled to ensure consitency.
 This is the same application as the Cloudera Data Engineering example, but illustrates the differences
  between packaging and running the Spark application in CDP Private Cloude Base and in Cloudera Data Engineering products.
+
+* [Apache HBase - Multi Cluster Client](hbase-mcc/README.md)
+
+HBase-MCC is a Cloudera only component to help to connect more than one HBase Cluster simultanously.
