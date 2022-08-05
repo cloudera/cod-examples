@@ -26,24 +26,9 @@
       <version>1.7.30</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.htrace</groupId>
-      <artifactId>htrace-core4</artifactId>
-      <version>4.2.0-incubating</version>
-    </dependency>
-    <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
       <version>1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>io.opentelemetry</groupId>
-      <artifactId>opentelemetry-api</artifactId>
-      <version>0.12.0</version>
-    </dependency>
-    <dependency>
-      <groupId>io.opentelemetry</groupId>
-      <artifactId>opentelemetry-context</artifactId>
-      <version>0.12.0</version>
     </dependency>
   </dependencies>
   <build>
@@ -61,6 +46,7 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
+              <!-- We have included all the related dependency here, based on the hbase shaded version it will automatically toggle between htrace or open telemetry -->
               <includeArtifactIds>slf4j-api,slf4j-log4j12,log4j,htrace-core4,commons-logging,hbase-shaded-client,opentelemetry-api,opentelemetry-context</includeArtifactIds>
               <outputDirectory>${project.build.directory}/nosql-libs/</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
