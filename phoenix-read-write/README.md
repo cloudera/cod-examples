@@ -22,65 +22,75 @@ done
 ```
 Phoenix-thick
 "https://gateway.cloudera.site/.../cdp-proxy-api/avatica/maven"
-"5.1.1.7.2.9.0-203"
+"5.1.1.7.2.15.0-147"
 Phoenix-thin
 "https://gateway.cloudera.site/.../cdp-proxy-api/avatica/maven"
-"6.0.0.7.2.9.0-203"
+"6.0.0.7.2.15.0-147"
 ```
 
 Finally, update the Phoenix versions in our Maven project/configuration.
-For Cloudera Runtime 7.2.8 and before use `phoenix-client` artifactId instead of `phoenix-client-hbase-2.2` for dependency and also update the `includeArtifactIds` with `phoenix-client,phoenix-queryserver-client`
+You need to change respective version corresponding to the respective profile, like HBase-2.2 or HBase-2.4 etc. 
+e.g If you are working with HBase 2.4 you need make change in HBASE-2.4 profile area.
+
+NOTE: For HBase 2.2 containing minor version lesser than or equal to 7.2.8 phoenix artifact was little different, so we created another profile for that.
+If you are using any minor version of HBase 2.2 below 7.2.9 then you need to change HBASE-2.2-7.2.8 profile area, else HBASE-2.2 area.
+
 ```
 <project>
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client-hbase-2.2</artifactId>
-      <!-- Phoenix thick client version given by COD -->
-      <version>5.1.1.7.2.9.0-203</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-queryserver-client</artifactId>
-      <!-- Phoenix thin client version given by COD -->
-      <version>6.0.0.7.2.9.0-203</version>
-    </dependency>
-  </dependencies>
-    <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.1.2</version>
-        <executions>
-          <execution>
-            <id>copy-sql-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <!-- Use phoenix-client artifactId for Cloudera Runtime 7.2.8 and before -->
-              <!-- <includeArtifactIds>phoenix-client,phoenix-queryserver-client</includeArtifactIds> -->
-              <includeArtifactIds>phoenix-client-hbase-2.2,phoenix-queryserver-client</includeArtifactIds>
-              <outputDirectory>${project.build.directory}/sql-libs/</outputDirectory>
-              <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>false</overWriteSnapshots>
-              <overWriteIfNewer>true</overWriteIfNewer>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <profiles>
+    <profile>
+      <id>HBASE-2.2-7.2.8</id>
+      <properties>
+        <phoenix.client.artifactid>phoenix-client</phoenix.client.artifactid>
+        <!-- Phoenix thick client version given by COD -->
+        <phoenix.client.version>5.0.0.7.2.8.0-228</phoenix.client.version>
+        <!-- Phoenix thin client version given by COD -->
+        <phoenix.queryserver.version>5.0.0.7.2.8.0-228</phoenix.queryserver.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>HBASE-2.2</id>
+      <properties>
+        <phoenix.client.artifactid>phoenix-client-hbase-2.2</phoenix.client.artifactid>
+        <!-- Phoenix thick client version given by COD -->
+        <phoenix.client.version>5.1.1.7.2.9.0-203</phoenix.client.version>
+        <!-- Phoenix thin client version given by COD -->
+        <phoenix.queryserver.version>6.0.0.7.2.9.0-203</phoenix.queryserver.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>HBASE-2.4</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <phoenix.client.artifactid>phoenix-client-hbase-2.4</phoenix.client.artifactid>
+        <!-- Phoenix thick client version given by COD -->
+        <phoenix.client.version>5.1.1.7.2.15.0-147</phoenix.client.version>
+        <!-- Phoenix thin client version given by COD -->
+        <phoenix.queryserver.version>6.0.0.7.2.15.0-147</phoenix.queryserver.version>
+      </properties>
+    </profile>
+  </profiles>
   ...
 </project>
 ```
 
 # Build the project
 
+While building, you can specify profile with -P argument
+
+If you are using HBase 2.4 version for this example
 ```
-$ mvn package
+$ mvn clean package -P HBASE-2.4
+```
+If you are using HBase 2.2 version for this example
+```
+$ mvn clean package -P HBASE-2.2
+```
+If you are using HBase 2.2 but prior to 7.2.9 version for this example
+```
+$ mvn clean package -P HBASE-2.2-7.2.8
 ```
 
 # Run the project
