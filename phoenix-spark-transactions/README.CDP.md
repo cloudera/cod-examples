@@ -17,14 +17,14 @@ hbase --version
 
 ```
 HBase Version
-2.4.6.7.2.14.0-133
+2.6.3.7.3.2.0-957
 ```
 
 Finally, update the HBase and Phoenix Connector versions in our Maven project/configuration.
 ```
 <properties>
 ...
-    <hbase.version>2.4.6.7.2.14.0-133</hbase.version>
+    <hbase.version>2.6.3.7.3.2.0-957</hbase.version>
 ...
 </properties>
 ```

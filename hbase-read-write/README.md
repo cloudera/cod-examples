@@ -16,7 +16,7 @@ application.
 $ cdp opdb describe-client-connectivity --database-name my-database --environment-name my-env  | jq '.connectors[] | select(.name == "hbase")'
 {
   "name": "hbase",
-  "version": "2.2.6.7.2.9.0-203",
+  "version": "2.6.3.7.3.2.0-957",
   "kind": "LIBRARY",
   "dependencies": {
     "mavenUrl": "https://repository.cloudera.com/artifactory/cloudera-repos"
@@ -42,7 +42,7 @@ In the above JSON, we need to use the `version` attribute in our Maven project/c
     <dependency>
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-shaded-client</artifactId>
-      <version>2.2.6.7.2.9.0-203</version>
+      <version>2.6.3.7.3.2.0-957</version>
     </dependency>
   </dependencies>
   ...

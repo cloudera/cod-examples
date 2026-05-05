@@ -27,17 +27,17 @@ cdp opdb describe-client-connectivity --database-name my-database --environment-
 
 ```
 HBase Version
-2.4.6.7.2.14.0-133
+2.6.3.7.3.2.0-957
 Phoenix Spark Version
-"6.0.0.7.2.14.0-133"
+6.0.0.7.3.2.0-957
 ```
 
 Finally, update the HBase and Phoenix Connector versions in our Maven project/configuration.
 ```
 <properties>
 ...
-    <phoenix.connector.version>6.0.0.7.2.14.0-133</phoenix.connector.version>
-    <hbase.version>2.4.6.7.2.14.0-133</hbase.version>
+    <phoenix.connector.version>6.0.0.7.3.2.0-957</phoenix.connector.version>
+    <hbase.version>2.6.3.7.3.2.0-957</hbase.version>
 ...
 </properties>
 ```

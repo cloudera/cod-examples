@@ -13,8 +13,8 @@
     <spec2.version>4.2.0</spec2.version>
     <spark.version>2.4.0</spark.version>
     <scala.binary.version>2.11</scala.binary.version>
-    <phoenix.connector.version>6.0.0.7.2.15.0-147</phoenix.connector.version>
-    <hbase.version>2.4.6.7.2.15.0-147</hbase.version>
+    <phoenix.connector.version>6.0.0.7.3.2.0-957</phoenix.connector.version>
+    <hbase.version>2.6.3.7.3.2.0-957</hbase.version>
   </properties>
 
   <dependencies>
@@ -33,7 +33,7 @@
     Their purpose is to download the necessary JARs so that they can be added to the CDE project. -->
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix5-spark-shaded</artifactId>
+      <artifactId>phoenix5-spark3-shaded</artifactId>
       <!-- Phoenix spark connector version given by COD -->
       <version>${phoenix.connector.version}</version>
     </dependency>

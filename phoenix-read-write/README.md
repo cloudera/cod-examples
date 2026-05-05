@@ -22,10 +22,10 @@ done
 ```
 Phoenix-thick
 "https://gateway.cloudera.site/.../cdp-proxy-api/avatica/maven"
-"5.1.1.7.2.15.0-147"
+"5.2.1.7.3.2.0-957"
 Phoenix-thin
 "https://gateway.cloudera.site/.../cdp-proxy-api/avatica/maven"
-"6.0.0.7.2.15.0-147"
+"6.0.0.7.3.2.0-957"
 ```
 
 Finally, update the Phoenix versions in our Maven project/configuration.
@@ -39,36 +39,26 @@ If you are using any minor version of HBase 2.2 below 7.2.9 then you need to cha
 <project>
   <profiles>
     <profile>
-      <id>HBASE-2.2-7.2.8</id>
-      <properties>
-        <phoenix.client.artifactid>phoenix-client</phoenix.client.artifactid>
-        <!-- Phoenix thick client version given by COD -->
-        <phoenix.client.version>5.0.0.7.2.8.0-228</phoenix.client.version>
-        <!-- Phoenix thin client version given by COD -->
-        <phoenix.queryserver.version>5.0.0.7.2.8.0-228</phoenix.queryserver.version>
-      </properties>
-    </profile>
-    <profile>
-      <id>HBASE-2.2</id>
-      <properties>
-        <phoenix.client.artifactid>phoenix-client-hbase-2.2</phoenix.client.artifactid>
-        <!-- Phoenix thick client version given by COD -->
-        <phoenix.client.version>5.1.1.7.2.9.0-203</phoenix.client.version>
-        <!-- Phoenix thin client version given by COD -->
-        <phoenix.queryserver.version>6.0.0.7.2.9.0-203</phoenix.queryserver.version>
-      </properties>
-    </profile>
-    <profile>
       <id>HBASE-2.4</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <phoenix.client.artifactid>phoenix-client-hbase-2.4</phoenix.client.artifactid>
         <!-- Phoenix thick client version given by COD -->
         <phoenix.client.version>5.1.1.7.2.15.0-147</phoenix.client.version>
         <!-- Phoenix thin client version given by COD -->
         <phoenix.queryserver.version>6.0.0.7.2.15.0-147</phoenix.queryserver.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>HBASE-2.6</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <phoenix.client.artifactid>phoenix-client-embedded-hbase-2.6</phoenix.client.artifactid>
+        <!-- Phoenix thick client version given by COD -->
+        <phoenix.client.version>5.2.1.7.3.2.0-957</phoenix.client.version>
+        <!-- Phoenix thin client version given by COD -->
+        <phoenix.queryserver.version>6.0.0.7.3.2.0-957</phoenix.queryserver.version>
       </properties>
     </profile>
   </profiles>
@@ -80,17 +70,13 @@ If you are using any minor version of HBase 2.2 below 7.2.9 then you need to cha
 
 While building, you can specify profile with -P argument
 
+If you are using HBase 2.6 version for this example
+```
+$ mvn clean package -P HBASE-2.6
+```
 If you are using HBase 2.4 version for this example
 ```
 $ mvn clean package -P HBASE-2.4
-```
-If you are using HBase 2.2 version for this example
-```
-$ mvn clean package -P HBASE-2.2
-```
-If you are using HBase 2.2 but prior to 7.2.9 version for this example
-```
-$ mvn clean package -P HBASE-2.2-7.2.8
 ```
 
 # Run the project
